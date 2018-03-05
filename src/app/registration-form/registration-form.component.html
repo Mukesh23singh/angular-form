@@ -1,102 +1,111 @@
-<div class="col" style="width: 30%;display: block;background-color: #eee;margin-left: auto;margin-right: auto;">
-
-  <form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
-
-    <fieldset ngModelGroup="name">
-      <div class="form-group" [ngClass]="{
+<form novalidate (ngSubmit)="onSubmit()" #f="ngForm">
+  <div class="row" style="padding: 50px 50px 50px 50px">
+    <div class="col-sm-4" style="display: block;background-color: #eee;margin-left: auto;margin-right: auto;">
+      <fieldset ngModelGroup="name">
+        <div class="form-group" [ngClass]="{
         'has-danger': firstName.invalid && (firstName.dirty || firstName.touched),
         'has-success': firstName.valid && (firstName.dirty || firstName.touched)}">
-        <label>First Name</label>
-        <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" required #firstName="ngModel">
-        <div class="form-control-feedback" *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
-          <p *ngIf="firstName.errors.required">First name is required</p>
+          <label>First Name</label>
+          <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" required #firstName="ngModel">
+          <div class="form-control-feedback" *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+            <p *ngIf="firstName.errors.required">First name is required</p>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{
+        'has-danger': lastName.invalid && (lastName.dirty || lastName.touched),
+        'has-success': lastName.valid && (lastName.dirty || lastName.touched)}">
+          <label>Last Name</label>
+          <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" required #lastName="ngModel">
+          <div class="form-control-feedback" *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+            <p *ngIf="lastName.errors.required">Last name is required</p>
+          </div>
+        </div>
+      </fieldset>
+      <!-- No data binding -->
+      <div class="form-group">
+        <label>Country</label>
+        <input type="text" class="form-control" name="country" ngModel>
+      </div>
+      <!-- One Way data binding -->
+      <div class="form-group" [ngClass]="{
+    'has-danger': city.invalid && (city.dirty || city.touched),
+    'has-success': city.valid && (city.dirty || city.touched)}">
+        <label>city</label>
+        <input type="text" class="form-control" name="city" [ngModel]="model.city" required #city="ngModel">
+        <div class="form-control-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
+          <p *ngIf="city.errors.required">City is required</p>
+        </div>
+      </div>
+      <!-- Two way data binding -->
+      <div class="form-group" [ngClass]="{
+      'has-danger': userName.invalid && (userName.dirty || userName.touched),
+      'has-success': userName.valid && (userName.dirty || userName.touched)}">
+        <label>User Name</label>
+        <input type="text" class="form-control" name="userName" [ngModel]="model.userName" (ngModelChange)="model.userName=($event)" required #userName="ngModel">
+        <div class="form-control-feedback" *ngIf="userName.errors && (userName.dirty || userName.touched)">
+          <p *ngIf="userName.errors.required">User name is required</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-4" style="display: block;background-color: #eee;margin-left: auto;margin-right: auto;">
+      <!-- Two way data binding with function-->
+      <div class="form-group" [ngClass]="{
+   'has-danger': age.invalid && (age.dirty || age.touched),
+   'has-success': age.valid && (age.dirty || age.touched)}">
+        <label>Age</label>
+        <input type="text" class="form-control" name="age" [ngModel]="model.age" (ngModelChange)="dataChanged($event)" required #age="ngModel">
+        <div class="form-control-feedback" *ngIf="age.errors && (age.dirty || age.touched)">
+          <p *ngIf="age.errors.required">Age is required</p>
+        </div>
+      </div>
+      <!-- Two way data binding example 2-->
+      <div class="form-group" [ngClass]="{
+      'has-danger': email.invalid && (email.dirty || email.touched),
+      'has-success': email.valid && (email.dirty || email.touched)}">
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="model.email" required pattern="[^ @]*@[^ @]*" #email="ngModel">
+        <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
+          <p *ngIf="email.errors.required">Email is required</p>
+          <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
         </div>
       </div>
 
       <div class="form-group" [ngClass]="{
-        'has-danger': lastName.invalid && (lastName.dirty || lastName.touched),
-        'has-success': lastName.valid && (lastName.dirty || lastName.touched)}">
-        <label>Last Name</label>
-        <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" required #lastName="ngModel">
-        <div class="form-control-feedback" *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
-          <p *ngIf="lastName.errors.required">Last name is required</p>
+      'has-danger': password.invalid && (password.dirty || password.touched),
+      'has-success': password.valid && (password.dirty || password.touched)}">
+        <label>Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" required minlength="8" #password="ngModel">
+        <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
+          <p *ngIf="password.errors.required">Password is required</p>
+          <p *ngIf="password.errors.minlength">Password must be at least 8 characters long</p>
         </div>
       </div>
-    </fieldset>
-    <!-- No data binding -->
-    <div class="form-group">
-      <label>Country</label>
-      <input type="text" class="form-control" name="country" ngModel>
-    </div>
-    <!-- One Way data binding -->
-    <div class="form-group" [ngClass]="{
-    'has-danger': city.invalid && (city.dirty || city.touched),
-    'has-success': city.valid && (city.dirty || city.touched)}">
-      <label>city</label>
-      <input type="text" class="form-control" name="city" [ngModel]="model.city"  required #city="ngModel">
-      <div class="form-control-feedback" *ngIf="city.errors && (city.dirty || city.touched)">
-        <p *ngIf="city.errors.required">City is required</p>
-      </div>
-    </div>
-    <!-- Two way data binding -->
-    <div class="form-group" [ngClass]="{
-      'has-danger': userName.invalid && (userName.dirty || userName.touched),
-      'has-success': userName.valid && (userName.dirty || userName.touched)}">
-      <label>User Name</label>
-      <input type="text" class="form-control" name="userName" [ngModel]="model.userName" (ngModelChange)="model.userName=($event)" required #userName="ngModel">
-      <div class="form-control-feedback" *ngIf="userName.errors && (userName.dirty || userName.touched)">
-        <p *ngIf="userName.errors.required">User name is required</p>
-      </div>
-    </div>
-    <!-- Two way data binding with function-->
-    <div class="form-group" [ngClass]="{
-     'has-danger': age.invalid && (age.dirty || age.touched),
-     'has-success': age.valid && (age.dirty || age.touched)}">
-      <label>Age</label>
-      <input type="text" class="form-control" name="age" [ngModel]="model.age" (ngModelChange)="dataChanged($event)" required #age="ngModel">
-      <div class="form-control-feedback" *ngIf="age.errors && (age.dirty || age.touched)">
-        <p *ngIf="age.errors.required">Age is required</p>
-      </div>
-    </div>
-    <!-- Two way data binding example 2-->
-    <div class="form-group" [ngClass]="{
-        'has-danger': email.invalid && (email.dirty || email.touched),
-        'has-success': email.valid && (email.dirty || email.touched)}">
-      <label>Email</label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="model.email" required pattern="[^ @]*@[^ @]*" #email="ngModel">
-      <div class="form-control-feedback" *ngIf="email.errors && (email.dirty || email.touched)">
-        <p *ngIf="email.errors.required">Email is required</p>
-        <p *ngIf="email.errors.pattern">Email must contain at least the @ character</p>
-      </div>
-    </div>
 
-    <div class="form-group" [ngClass]="{
-        'has-danger': password.invalid && (password.dirty || password.touched),
-        'has-success': password.valid && (password.dirty || password.touched)}">
-      <label>Password</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" required minlength="8" #password="ngModel">
-      <div class="form-control-feedback" *ngIf="password.errors && (password.dirty || password.touched)">
-        <p *ngIf="password.errors.required">Password is required</p>
-        <p *ngIf="password.errors.minlength">Password must be at least 8 characters long</p>
+      <div class="form-group">
+        <label>Language</label>
+        <select class="form-control" name="language" [(ngModel)]="model.language">
+          <option value="">Please select a language</option>
+            <option *ngFor="let lang of langs"
+              [value]="lang">{{lang}}
+           </option>
+        </select>
       </div>
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit </button>
     </div>
-
-    <div class="form-group">
-      <label>Language</label>
-      <select class="form-control" name="language" [(ngModel)]="model.language">
-			<option value="">Please select a language</option>
-			<option *ngFor="let lang of langs"
-			        [value]="lang">{{lang}}
-			</option>
-		</select>
+    <div class="col-sm-4">
+      <p>{{f.value | json}}</p>
+      <p>City: {{model.city | json}}</p>
     </div>
+  </div>
+  <div class="col" style="width: 30%;">
 
-    <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Submit
-	</button>
 
-  </form>
-</div>
-<br>
-<br>
-<p>{{f.value | json}}</p>
-<p>City: {{model.city | json}}</p>
+  </div>
+  <br>
+  <br>
+
+</form>
