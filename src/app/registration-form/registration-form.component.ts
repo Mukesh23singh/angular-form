@@ -31,8 +31,8 @@ export class RegistrationFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+      console.log(this.model);
       console.log("Form Submitted!");
-      this.form.reset();
     }
   }
 

@@ -5,7 +5,8 @@ export class Signup {
     public email: string = '',
     public password: string = '',
     public language: string = '',
-    public userName: string = 'mukesh',
-    public age: string = '') {
+    public userName: string = '',
+    public age: string = '',
+    public city: string = 'Mumbai') {
   }
 }
