@@ -19,7 +19,7 @@ export class RegistrationFormComponent implements OnInit {
   ngOnInit() {
 
   }
-  
+
   model: Signup = new Signup();
   @ViewChild('f') form: any;
 
@@ -33,6 +33,12 @@ export class RegistrationFormComponent implements OnInit {
     if (this.form.valid) {
       console.log("Form Submitted!");
       this.form.reset();
+    }
+  }
+
+  dataChanged(value) {
+    if (value.length == 2) {
+      this.model.age = value + ' Years';
     }
   }
 
